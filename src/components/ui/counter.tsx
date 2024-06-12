@@ -12,6 +12,7 @@ export default function Counter({ rot }: CounterProps) {
   const [pressType, setPresstype] = useState<"increment" | "decrement" | null>(
     null
   );
+  const [rotation, setRotation] = useState(rot);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -69,24 +70,38 @@ export default function Counter({ rot }: CounterProps) {
     </div>
   );
 
-  if (rot === "none") {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center transform rotate-90">
-          {content}
-          <div className="text-center">
-            Atraxa
+  switch (rotation) {
+    case "none":
+      return (
+        <>
+          <div className="flex flex-col items-center justify-center transform rotate-0">
+            {content}
           </div>
-        </div>
-      </>
-    );
-  } else if (rot === "180") {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center transform -rotate-90">
-          {content}
-        </div>
-      </>
-    );
+        </>
+      );
+    case "-90":
+      return (
+        <>
+          <div className="flex flex-col items-center justify-center transform -rotate-90">
+            {content}
+          </div>
+        </>
+      );
+      case "90":
+        return (
+          <>
+            <div className="flex flex-col items-center justify-center transform rotate-90">
+              {content}
+            </div>
+          </>
+        );
+    default:
+      return (
+        <>
+          <div className="flex flex-col items-center justify-center transform rotate-90">
+            {content}
+          </div>
+        </>
+      );
   }
 }
