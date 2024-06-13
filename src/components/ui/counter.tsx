@@ -12,7 +12,6 @@ export default function Counter({ rot }: CounterProps) {
   const [pressType, setPresstype] = useState<"increment" | "decrement" | null>(
     null
   );
-  const [rotation, setRotation] = useState(rot);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -43,7 +42,7 @@ export default function Counter({ rot }: CounterProps) {
   };
 
   const content = (
-    <div className="flex items-center justify-center w-80 h-80">
+    <div className="flex items-center justify-center">
       <Button
         variant="ghost"
         size="icon"
@@ -70,11 +69,12 @@ export default function Counter({ rot }: CounterProps) {
     </div>
   );
 
-  switch (rotation) {
+
+  switch (rot) {
     case "none":
       return (
         <>
-          <div className="flex flex-col items-center justify-center transform rotate-0">
+          <div className="flex flex-col col-span-2 items-center justify-center transform rotate-0">
             {content}
           </div>
         </>
@@ -98,7 +98,7 @@ export default function Counter({ rot }: CounterProps) {
     default:
       return (
         <>
-          <div className="flex flex-col items-center justify-center transform rotate-90">
+          <div className="flex flex-col items-center justify-center transform rotate-0">
             {content}
           </div>
         </>
