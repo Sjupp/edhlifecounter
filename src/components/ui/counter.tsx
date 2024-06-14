@@ -7,11 +7,12 @@ interface CounterProps {
 }
 
 export default function Counter({ rot }: CounterProps) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(40);
   const [isPressing, setIsPressing] = useState(false);
   const [pressType, setPresstype] = useState<"increment" | "decrement" | null>(
     null
   );
+  const [rotation, setRotation] = useState(rot);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -41,8 +42,8 @@ export default function Counter({ rot }: CounterProps) {
     setIsPressing(false);
   };
 
-  const content = (
-    <div className="flex items-center justify-center">
+  let content = (
+    <div className="flex items-center gap-4">
       <Button
         variant="ghost"
         size="icon"
@@ -54,7 +55,7 @@ export default function Counter({ rot }: CounterProps) {
       >
         <MinusIcon className="w-5 h-5" />
       </Button>
-      <div className="text-6xl mx-16 font-bold">{count}</div>
+      <div className="text-6xl font-bold">{count}</div>
       <Button
         variant="ghost"
         size="icon"
@@ -69,12 +70,19 @@ export default function Counter({ rot }: CounterProps) {
     </div>
   );
 
+  if (count <= 0) {
+    content = (
+      <div className="text-2xl flex items-center justify-center">
+        Game Over
+      </div>
+    );
+  } 
 
-  switch (rot) {
+  switch (rotation) {
     case "none":
       return (
         <>
-          <div className="flex flex-col col-span-2 items-center justify-center transform rotate-0">
+          <div className="flex col-span-2 p-8 items-center justify-center transform rotate-0">
             {content}
           </div>
         </>
@@ -82,7 +90,7 @@ export default function Counter({ rot }: CounterProps) {
     case "-90":
       return (
         <>
-          <div className="flex flex-col items-center justify-center transform -rotate-90">
+          <div className="flex flex-col p-8 items-center justify-center transform -rotate-90">
             {content}
           </div>
         </>
@@ -90,7 +98,7 @@ export default function Counter({ rot }: CounterProps) {
       case "90":
         return (
           <>
-            <div className="flex flex-col items-center justify-center transform rotate-90">
+          <div className="flex flex-col p-8 items-center justify-center transform rotate-90">
               {content}
             </div>
           </>
@@ -98,7 +106,7 @@ export default function Counter({ rot }: CounterProps) {
     default:
       return (
         <>
-          <div className="flex flex-col items-center justify-center transform rotate-0">
+          <div className="flex flex-col items-center justify-center transform rotate-90">
             {content}
           </div>
         </>

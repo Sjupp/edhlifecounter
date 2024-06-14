@@ -21,7 +21,7 @@ export default function PlayArea({ numPlayers }: PlayAreaProps) {
                 : numPlayers >= 4
                 ? (i + 1) % 5 === 0
                   ? "none"
-                  : (i + 1) % 5 === 1
+                  : (i + 1) % 5 === 1 || (i + 1) % 5 === 3
                   ? "90"
                   : "-90"
                 : "none"

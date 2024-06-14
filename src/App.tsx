@@ -28,7 +28,7 @@ function App() {
               <CardContent>
                 <div className="text-6xl text-bold p-5">{numPlayers}</div>
                 <div className="p-5">Choose number of players</div>
-                <div className="align-middle justify-center flex">
+                <div className="align-middle gap-6 justify-center flex">
                   <Button onClick={() => setNumPlayers(numPlayers - 1)}>
                     <MinusIcon className="h-5 w-5" />
                   </Button>
@@ -38,7 +38,7 @@ function App() {
                 </div>
               </CardContent>
               <CardFooter className="flex items-center justify-center">
-                <Button onClick={() => setStartGame(true)}>Create Game</Button>
+                <Button className="bg-white text-gray-950" onClick={() => setStartGame(true)}>Create Game</Button>
               </CardFooter>
             </Card>
           </div>
