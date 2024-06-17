@@ -11,14 +11,15 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Minimize, MinusIcon, PlusIcon, RefreshCwIcon } from "lucide-react";
+import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon } from "lucide-react";
 import { useState } from "react";
 
 interface PlayAreaProps {
   numPlayers: number;
+  onMenu: () => void;
 }
 
-const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers }) => {
+const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
     const initialCounts = Array(numPlayers).fill(40);
     const [counts, setCounts] = useState<number[]>(initialCounts);
     const [players, setPlayers] = useState(numPlayers);
@@ -79,6 +80,9 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers }) => {
                   onClick={handleReset}
                 >
                   <RefreshCwIcon />
+                </Button>
+                <Button variant="rounded" className="w-16 h-16" onClick={onMenu}>
+                  <Home />
                 </Button>
               </AlertDialogFooter>
             </AlertDialogContent>

@@ -1,56 +1,30 @@
 import { useState } from "react";
 import "./App.css";
 import PlayArea from "./components/ui/playArea";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { MinusIcon, PlusIcon } from "lucide-react";
+
+import Menu from "./components/ui/menu";
 
 function App() {
   const [numPlayers, setNumPlayers] = useState(5);
   const [startGame, setStartGame] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState<"menu" | "play">("menu");
 
+  const handleStartGame = (players: number) => {
+    setNumPlayers(players);
+    setCurrentScreen("play");
+  };
+
+  const handleMenu = () => {
+    setCurrentScreen("menu");
+  };
+  
   return (
     <>
-      {startGame === false ? (
-        <>
-          <div className="flex flex-col h-screen w-full items-center justify-center p-4 text-white">
-            <Card>
-              <CardHeader>
-                <CardTitle>Create a Game</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-6xl text-bold p-5">{numPlayers}</div>
-                <div className="p-5">Choose number of players</div>
-                <div className="align-middle gap-6 justify-center flex">
-                  <Button variant="outline" onClick={() => setNumPlayers(numPlayers - 1)}>
-                    <MinusIcon className="h-5 w-5" />
-                  </Button>
-                  <Button variant="outline" onClick={() => setNumPlayers(numPlayers + 1)}>
-                    <PlusIcon className="h-5 w-5" />
-                  </Button>
-                </div>
-              </CardContent>
-              <CardFooter className="flex items-center justify-center">
-                <Button onClick={() => setStartGame(true)}>Create Game</Button>
-              </CardFooter>
-            </Card>
-          </div>
-        </>
-      ) : (
-        <div className="flex flex-col h-screen w-full bg-gray-950 items-center justify-center p-4 text-white">
-          <PlayArea numPlayers={numPlayers} />
-        </div>
-      )}
+      {currentScreen === "menu" && <Menu onStartGame={handleStartGame}/>}
+      {currentScreen === "play" && <PlayArea numPlayers={numPlayers} onMenu={handleMenu} />}
     </>
-  );
+    );
+  };
 
-}
 
 export default App;
