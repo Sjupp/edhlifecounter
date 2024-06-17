@@ -20,8 +20,8 @@ function App() {
     <>
       {startGame === false ? (
         <>
-          <div className="flex flex-col h-screen w-full bg-gray-950 items-center justify-center p-4 text-white">
-            <Card className="bg-gray-950 text-white">
+          <div className="flex flex-col h-screen w-full items-center justify-center p-4 text-white">
+            <Card>
               <CardHeader>
                 <CardTitle>Create a Game</CardTitle>
               </CardHeader>
@@ -29,16 +29,16 @@ function App() {
                 <div className="text-6xl text-bold p-5">{numPlayers}</div>
                 <div className="p-5">Choose number of players</div>
                 <div className="align-middle gap-6 justify-center flex">
-                  <Button onClick={() => setNumPlayers(numPlayers - 1)}>
+                  <Button variant="outline" onClick={() => setNumPlayers(numPlayers - 1)}>
                     <MinusIcon className="h-5 w-5" />
                   </Button>
-                  <Button onClick={() => setNumPlayers(numPlayers + 1)}>
+                  <Button variant="outline" onClick={() => setNumPlayers(numPlayers + 1)}>
                     <PlusIcon className="h-5 w-5" />
                   </Button>
                 </div>
               </CardContent>
               <CardFooter className="flex items-center justify-center">
-                <Button className="bg-white text-gray-950" onClick={() => setStartGame(true)}>Create Game</Button>
+                <Button onClick={() => setStartGame(true)}>Create Game</Button>
               </CardFooter>
             </Card>
           </div>

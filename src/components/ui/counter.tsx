@@ -1,32 +1,40 @@
 import { useEffect, useState } from "react";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "./button";
+import React from "react";
+import { on } from "events";
 
 interface CounterProps {
   rot: string;
+  count: number;
+  onIncrement: () => void;
+  onDecrement: () => void;
 }
 
-export default function Counter({ rot }: CounterProps) {
-  const [count, setCount] = useState(40);
+
+const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
   const [isPressing, setIsPressing] = useState(false);
   const [pressType, setPresstype] = useState<"increment" | "decrement" | null>(
     null
   );
   const [rotation, setRotation] = useState(rot);
 
+
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
     if (isPressing) {
       interval = setInterval(() => {
-        setCount((count) =>
-          pressType === "increment" ? count + 1 : count - 1
-        );
+        if (pressType === "increment"){
+          onIncrement();
+        } else if (pressType === "decrement") {
+          onDecrement();
+        }
       }, 200);
     }
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isPressing, pressType]);
+  }, [isPressing, pressType, onIncrement, onDecrement, count]);
 
   const handleMouseDown = (type: "increment" | "decrement") => {
     setPresstype(type);
@@ -42,13 +50,15 @@ export default function Counter({ rot }: CounterProps) {
     setIsPressing(false);
   };
 
+
+
   let content = (
     <div className="flex items-center gap-4">
       <Button
         variant="ghost"
         size="icon"
         className=""
-        onClick={() => setCount((count) => count - 1)}
+        onClick={onDecrement}
         onMouseDown={() => handleMouseDown("decrement")}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
@@ -60,13 +70,14 @@ export default function Counter({ rot }: CounterProps) {
         variant="ghost"
         size="icon"
         className=""
-        onClick={() => setCount((count) => count + 1)}
+        onClick={onIncrement}
         onMouseDown={() => handleMouseDown("increment")}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
       >
         <PlusIcon className="w-5 h-5" />
       </Button>
+    
     </div>
   );
 
@@ -82,7 +93,7 @@ export default function Counter({ rot }: CounterProps) {
     case "none":
       return (
         <>
-          <div className="flex col-span-2 p-8 items-center justify-center transform rotate-0">
+          <div className="flex col-span-2 items-center justify-center transform rotate-0">
             {content}
           </div>
         </>
@@ -112,4 +123,6 @@ export default function Counter({ rot }: CounterProps) {
         </>
       );
   }
-}
+};
+
+export default Counter;
