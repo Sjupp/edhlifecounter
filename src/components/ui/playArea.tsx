@@ -21,6 +21,7 @@ interface PlayAreaProps {
 const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers }) => {
     const initialCounts = Array(numPlayers).fill(40);
     const [counts, setCounts] = useState<number[]>(initialCounts);
+    const [players, setPlayers] = useState(numPlayers);
 
     const handleIncrement = (i: number) => {
         setCounts((prev) => {
@@ -42,26 +43,35 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers }) => {
         setCounts(initialCounts);
     };
 
+    const handleAddPlayer = () => {
+        setPlayers((prev) => prev + 1);
+        setCounts((prev) => [...prev, 40]);
+    };
+    const handleRemovePlayer = () => {            
+        setPlayers((prev) => prev - 1);
+        setCounts((prevCounts) => prevCounts.slice(0, -1));
+    };
+
   return (
     <>
       <div className="grid grid-cols-2 grid-rows-${numPlayers} h-screen w-full bg-background text-foreground">
-        <div className="fixed top-1/2 left-0 w-full h-48">
+        <div className="fixed top-1/2 left-0 w-full h-48 z-30 pointer-events-none">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline" className="circle-button">
+              <Button variant="outline" className="circle-button pointer-events-auto">
                 Menu
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="flex flex-col gap-4">
               <AlertDialogFooter className="flex items-center gap-6 justify-center">
                 <AlertDialogCancel className="w-16 h-16">
                   <Minimize />
                 </AlertDialogCancel>
-                <Button variant="rounded" className="w-16 h-16">
-                  <PlusIcon />
-                </Button>
-                <Button variant="rounded" className="w-16 h-16">
+                <Button variant="rounded" className="w-16 h-16" onClick={handleRemovePlayer}>
                   <MinusIcon />
+                </Button>
+                <Button variant="rounded" className="w-16 h-16" onClick={handleAddPlayer}>
+                  <PlusIcon />
                 </Button>
                 <Button
                   variant="rounded"

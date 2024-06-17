@@ -57,7 +57,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
       <Button
         variant="ghost"
         size="icon"
-        className=""
+        className="pointer-events-auto"
         onClick={onDecrement}
         onMouseDown={() => handleMouseDown("decrement")}
         onMouseUp={handleMouseUp}
@@ -69,7 +69,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
       <Button
         variant="ghost"
         size="icon"
-        className=""
+        className="pointer-events-auto"
         onClick={onIncrement}
         onMouseDown={() => handleMouseDown("increment")}
         onMouseUp={handleMouseUp}
@@ -93,7 +93,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
     case "none":
       return (
         <>
-          <div className="flex col-span-2 items-center justify-center transform rotate-0">
+          <div className="flex col-span-2 items-center justify-center transform rotate-0 pointer-events-none">
             {content}
           </div>
         </>
@@ -101,7 +101,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
     case "-90":
       return (
         <>
-          <div className="flex flex-col p-8 items-center justify-center transform -rotate-90">
+          <div className="flex flex-col items-center justify-center transform -rotate-90 pointer-events-none">
             {content}
           </div>
         </>
@@ -109,7 +109,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
       case "90":
         return (
           <>
-          <div className="flex flex-col p-8 items-center justify-center transform rotate-90">
+          <div className="flex flex-col items-center justify-center transform rotate-90 pointer-events-none">
               {content}
             </div>
           </>
