@@ -30,7 +30,7 @@ const Menu = ({ onStartGame }: MenuProps) => {
                 </div>
               </CardContent>
               <CardFooter className="flex items-center justify-center">
-                <Button onClick={() => onStartGame(numPlayers)}>Create Game</Button>
+                <Button onClick={() => onStartGame(numPlayers)}>Start blasting</Button>
               </CardFooter>
             </Card>
           </div>

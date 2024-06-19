@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon } from "lucide-react";
 import { useState } from "react";
+import * as Scry from "scryfall-sdk";
 
 interface PlayAreaProps {
   numPlayers: number;
@@ -83,6 +84,9 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                 </Button>
                 <Button variant="rounded" className="w-16 h-16" onClick={onMenu}>
                   <Home />
+                </Button>
+                <Button variant="rounded" className="w-16 h-16" onClick={onMenu}>
+                    Get legendary cards
                 </Button>
               </AlertDialogFooter>
             </AlertDialogContent>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "./button";
+import { ComboboxDemo } from "./combobox";
+import { preprocessCards } from "../../scripts/preprocessCards";
 
 interface CounterProps {
   rot: string;
@@ -9,6 +11,7 @@ interface CounterProps {
   onDecrement: () => void;
 }
 
+const { legendaryCreatures, creatureMap } = preprocessCards();
 
 const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
   const [isPressing, setIsPressing] = useState(false);
@@ -48,10 +51,11 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
     setIsPressing(false);
   };
 
-
+  if (!legendaryCreatures || !creatureMap) 
+    return <div>Loading...</div>;
 
   let content = (
-    <div className="flex items-center gap-4">
+    <><div className="flex items-center gap-4 ">
       <Button
         variant="ghost"
         size="icon"
@@ -75,8 +79,12 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
       >
         <PlusIcon className="w-5 h-5" />
       </Button>
-    
+
     </div>
+    <div className="pointer-events-auto p-4">
+        <ComboboxDemo rot={rotation} legendaryCreatures={legendaryCreatures} creatureMap={creatureMap}></ComboboxDemo>
+      </div>
+      </>
   );
 
   if (count <= 0) {
