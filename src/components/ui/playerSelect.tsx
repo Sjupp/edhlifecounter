@@ -3,10 +3,22 @@ import { Combobox } from "./combobox";
 import { preprocessCards } from "@/scripts/preprocessCards";
 import { useState } from "react";
 import { Card, CardContent, CardHeader } from "./card";
+import { Input } from "./input";
 
 const { legendaryCreatures, creatureMap } = preprocessCards();
 
-const players = [{
+interface playerSelectProps {
+  numPlayers: number;
+  onConfirm: (numPlayers: number) => void;
+}
+
+export default function PlayerSelect({
+  numPlayers,
+  onConfirm,
+}: playerSelectProps) {
+
+
+const [players, setPlayers] = useState([{
     id: 1,
     name: "Player 1"
 }, {
@@ -21,19 +33,7 @@ const players = [{
 }, {
     id: 5,
     name: "Player 5"
-}];
-
-
-interface playerSelectProps {
-  numPlayers: number;
-  onConfirm: (numPlayers: number) => void;
-}
-
-export default function PlayerSelect({
-  numPlayers,
-  onConfirm,
-}: playerSelectProps) {
-
+}]);
 
   return (
     <>
@@ -44,7 +44,8 @@ export default function PlayerSelect({
         {players.map((i) => (
             <Card key={i.id}>
             <CardHeader>{i.name}</CardHeader>
-            <CardContent>
+            <CardContent className="">
+            <Input type="name" placeholder={i.name} className="my-2"></Input>
               <Combobox
                 legendaryCreatures={legendaryCreatures}
                 creatureMap={creatureMap}
