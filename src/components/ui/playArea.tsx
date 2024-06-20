@@ -13,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon } from "lucide-react";
 import { useState } from "react";
-import * as Scry from "scryfall-sdk";
 
 interface PlayAreaProps {
   numPlayers: number;

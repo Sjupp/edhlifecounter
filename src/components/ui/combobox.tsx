@@ -20,7 +20,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-const ITEMS_PER_PAGE = 100; // Number of items to load per batch
 
 interface ComboboxProps {
   legendaryCreatures: any[];
@@ -33,11 +32,7 @@ export function Combobox({
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedName, setSelectedName] = React.useState("");
-  const [displayedItems, setDisplayedItems] = React.useState(
-    legendaryCreatures.slice(0, ITEMS_PER_PAGE)
-  );
   const [searchTerm, setSearchTerm] = React.useState("");
-   const [currentPage, setCurrentPage] = React.useState(1);
 
   const filteredCreatures = React.useMemo(() => {
     if (!searchTerm) return legendaryCreatures;
@@ -46,16 +41,6 @@ export function Combobox({
     );
   }, [searchTerm, legendaryCreatures]);
 
-  // Load more items when the user reaches the end of the list
-  const loadMoreItems = () => {
-    const nextPage = currentPage + 1;
-    const startIndex = currentPage * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    const newItems = legendaryCreatures.slice(startIndex, endIndex);
-
-    setDisplayedItems((prevItems) => [...prevItems, ...newItems]);
-    setCurrentPage(nextPage);
-  };
 
   const Row: React.FC<ListChildComponentProps> = ({ index, style }) => {
     const creature = filteredCreatures[index];
@@ -104,7 +89,7 @@ export function Combobox({
             <CommandEmpty>No commander found.</CommandEmpty>
             <CommandGroup>
               <List
-                height={2000}
+                height={200}
                 itemCount={filteredCreatures.length}
                 itemSize={35}
                 width={220}

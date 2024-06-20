@@ -6,7 +6,6 @@ import PlayerSelect from "./components/ui/playerSelect";
 
 function App() {
   const [numPlayers, setNumPlayers] = useState(5);
-  const [startGame, setStartGame] = useState(false);
   const [currentScreen, setCurrentScreen] = useState<"menu" | "playerSelect" | "play">("menu");
 
   const handleStartGame = (players: number) => {
