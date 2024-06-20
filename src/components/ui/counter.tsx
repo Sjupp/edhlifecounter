@@ -52,7 +52,12 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
 
 
   let content = (
-    <><div className="flex items-center gap-4 ">
+    <><div className="flex flex-col items-center gap-4 ">
+      <div className="flex text-gray-500 font-semibold">
+        Player name
+      </div>
+      <div className="flex gap-4 p-6 items-center justify-center">
+
       <Button
         variant="ghost"
         size="icon"
@@ -61,7 +66,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
         onMouseDown={() => handleMouseDown("decrement")}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
-      >
+        >
         <MinusIcon className="w-5 h-5" />
       </Button>
       <div className="text-6xl font-bold">{count}</div>
@@ -73,9 +78,13 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
         onMouseDown={() => handleMouseDown("increment")}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
-      >
+        >
         <PlusIcon className="w-5 h-5" />
       </Button>
+        </div>
+      <div className="text-gray-500 font-semibold">
+        Commander name
+      </div>
 
     </div>
       </>

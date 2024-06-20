@@ -24,11 +24,15 @@ import {
 interface ComboboxProps {
   legendaryCreatures: any[];
   creatureMap: Map<string, string>;
+  updateCommander: (id: number, name: string) => void;
+  playerId: number;
 }
 
 export function Combobox({
   legendaryCreatures = [],
   creatureMap = new Map(),
+  updateCommander,
+  playerId, 
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedName, setSelectedName] = React.useState("");
@@ -51,6 +55,7 @@ export function Combobox({
         onSelect={() => {
           setSelectedName(creature.name);
           setOpen(false);
+          updateCommander(playerId, creature.name);
         }}
         style={style}
       >
