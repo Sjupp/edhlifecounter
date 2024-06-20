@@ -85,9 +85,6 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                 <Button variant="rounded" className="w-16 h-16" onClick={onMenu}>
                   <Home />
                 </Button>
-                <Button variant="rounded" className="w-16 h-16" onClick={onMenu}>
-                    Get legendary cards
-                </Button>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>

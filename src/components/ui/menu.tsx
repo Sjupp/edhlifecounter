@@ -4,11 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 
 interface MenuProps {
-  onStartGame: (players: number) => void;
+  onPlayerSelect: (numPlayers: number) => void;
 }
 
-const Menu = ({ onStartGame }: MenuProps) => {
+const Menu = ({ onPlayerSelect }: MenuProps) => {
   const [numPlayers, setNumPlayers] = useState<number>(5);
+  const players = [];
+
+
 
   return (
         <>
@@ -30,7 +33,7 @@ const Menu = ({ onStartGame }: MenuProps) => {
                 </div>
               </CardContent>
               <CardFooter className="flex items-center justify-center">
-                <Button onClick={() => onStartGame(numPlayers)}>Start blasting</Button>
+                <Button onClick={() => onPlayerSelect(numPlayers)}>Start blasting</Button>
               </CardFooter>
             </Card>
           </div>

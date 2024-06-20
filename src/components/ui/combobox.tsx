@@ -22,19 +22,17 @@ import {
 
 const ITEMS_PER_PAGE = 100; // Number of items to load per batch
 
-interface ComboboxDemoProps {
-  rot: string;
+interface ComboboxProps {
   legendaryCreatures: any[];
   creatureMap: Map<string, string>;
 }
 
-export function ComboboxDemo({
-  rot,
+export function Combobox({
   legendaryCreatures = [],
   creatureMap = new Map(),
-}: ComboboxDemoProps) {
+}: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
-  const [id, setId] = React.useState("");
+  const [selectedName, setSelectedName] = React.useState("");
   const [displayedItems, setDisplayedItems] = React.useState(
     legendaryCreatures.slice(0, ITEMS_PER_PAGE)
   );
@@ -65,8 +63,8 @@ export function ComboboxDemo({
       <CommandItem
         key={creature.id}
         value={creature.name}
-        onSelect={(currentId) => {
-          setId(currentId === id ? "" : currentId);
+        onSelect={() => {
+          setSelectedName(creature.name);
           setOpen(false);
         }}
         style={style}
@@ -74,7 +72,7 @@ export function ComboboxDemo({
         <Check
           className={cn(
             "mr-2 h-4 w-4",
-            id === creature.id ? "opacity-100" : "opacity-0"
+          selectedName === creature.name ? "opacity-100" : "opacity-0"
           )}
         />
         {creature.name}
@@ -91,16 +89,16 @@ export function ComboboxDemo({
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {id ? creatureMap.get(id) : "Select commander..."}
+          {selectedName || "Select commander..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className={`w-[200px] p-0 rotate-${rot}`}>
+      <PopoverContent className={`w-[200px] p-0`}>
         <Command>
           <CommandInput
             placeholder="Search commander..."
             value={searchTerm}
-            onValueChange={(value) => setSearchTerm(value)}
+            onValueChange={setSearchTerm}
           />
           <CommandList>
             <CommandEmpty>No commander found.</CommandEmpty>
