@@ -33,7 +33,7 @@ function App() {
     },
   ]);
 
-  const updatePlayer = (id, newName) => {
+  const updatePlayer = (id: number, newName: any) => {
     setPlayers((prevPlayers) =>
       prevPlayers.map((player) =>
         player.id === id ? { ...player, name: newName } : player
@@ -64,7 +64,6 @@ function App() {
       {currentScreen === "playerSelect" && (
         <PlayerSelect
           numPlayers={numPlayers}
-          players={players}
           onConfirm={handleStartGame}
         />
       )}

@@ -40,7 +40,7 @@ const [players, setPlayers] = useState([{
     commander: ""
 }]);
 
-  const updatePlayer = (id, newName) => {
+  const updatePlayer = (id: number, newName: string) => {
     setPlayers((prevPlayers) =>
       prevPlayers.map((player) =>
         player.id === id ? { ...player, name: newName } : player
@@ -48,7 +48,7 @@ const [players, setPlayers] = useState([{
     );
   };
 
-  const updateCommander = (id, newCommander) => {
+  const updateCommander = (id: number, newCommander: any) => {
     setPlayers((prevPlayers) =>
       prevPlayers.map((player) =>
         player.id === id ? { ...player, commander: newCommander } : player
