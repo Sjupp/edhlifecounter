@@ -16,7 +16,6 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
   const [pressType, setPresstype] = useState<"increment" | "decrement" | null>(
     null
   );
-  const [rotation, setRotation] = useState(rot);
 
 
   useEffect(() => {
@@ -98,7 +97,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
     );
   } 
 
-  switch (rotation) {
+  switch (rot) {
     case "none":
       return (
         <>

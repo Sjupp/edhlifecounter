@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader } from "./card";
 import { Input } from "./input";
 
-const { legendaryCreatures, creatureMap } = preprocessCards();
+const { legendaryCreatures } = preprocessCards();
 
 interface playerSelectProps {
   numPlayers: number;
@@ -61,7 +61,7 @@ const [players, setPlayers] = useState([{
 
 
 <div className="flex flex-col items-center justify-center h-screen w-full">
-<Card className="flex flex-col justify-center w-2/3 items-center">
+    <Card className="flex flex-col justify-center w-2/3 items-center">
 
       <div className="flex flex-wrap gap-4 justify-center items-center pointer-events-auto p-4">
         {players.map((i) => (
@@ -72,7 +72,6 @@ const [players, setPlayers] = useState([{
             <Input type="name" placeholder={i.name} className="my-2" onChange={(e) => updatePlayer(i.id, e.target.value)}></Input>
               <Combobox
                 legendaryCreatures={legendaryCreatures}
-                creatureMap={creatureMap}
                 playerId={i.id}
                 updateCommander={updateCommander}
                 ></Combobox>

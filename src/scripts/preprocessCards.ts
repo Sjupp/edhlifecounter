@@ -5,5 +5,5 @@ export function preprocessCards() {
     legendaryCreatures.forEach((creature) => {
         creatureMap.set(creature.id, creature.name);
     });
-    return {legendaryCreatures, creatureMap};
+    return {legendaryCreatures};
 } 

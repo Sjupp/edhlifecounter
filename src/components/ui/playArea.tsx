@@ -1,13 +1,9 @@
 import Counter from "./counter";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
@@ -92,13 +88,13 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
           <Counter
             key={i}
             rot={
-              numPlayers <= 3
+              players <= 3
                 ? (i + 1) % 3 === 0
                   ? "none"
                   : (i + 1) % 3 === 1
                   ? "90"
                   : "-90"
-                : numPlayers >= 4
+                : players >= 4
                 ? (i + 1) % 5 === 0
                   ? "none"
                   : (i + 1) % 5 === 1 || (i + 1) % 5 === 3

@@ -1,5 +1,4 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,7 +15,6 @@ interface MenuProps {
 }
 
 const Menu = ({ onPlayerSelect, numPlayers, setNumPlayers }: MenuProps) => {
-  const players = [];
 
   return (
     <>

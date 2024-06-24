@@ -23,14 +23,12 @@ import {
 
 interface ComboboxProps {
   legendaryCreatures: any[];
-  creatureMap: Map<string, string>;
   updateCommander: (id: number, name: string) => void;
   playerId: number;
 }
 
 export function Combobox({
   legendaryCreatures = [],
-  creatureMap = new Map(),
   updateCommander,
   playerId, 
 }: ComboboxProps) {
