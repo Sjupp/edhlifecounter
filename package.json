@@ -11,6 +11,7 @@
     "fetch-cards": "ts-node ./src/scripts/fetchcards.js"
   },
   "dependencies": {
+    "@babel/runtime": "^7.24.7",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-popover": "^1.0.7",
@@ -20,8 +21,10 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "lucide-react": "^0.391.0",
+    "memoize-one": "^6.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.2.0",
+    "react-window": "^1.8.10",
     "scryfall-sdk": "^4.2.2",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
