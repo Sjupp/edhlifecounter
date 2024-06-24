@@ -5,7 +5,9 @@ import { defineConfig } from "vite"
 export default defineConfig({
   plugins: [react()],
   build: {
-    sourcemap: true,
+    rollupOptions: {
+      external: ['react-window']
+    }
   },
   resolve: {
     alias: {
