@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNEXT",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ESNEXT", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "sourceMap": true,
+    "sourceMap": false,
 
     /* Bundler mode */
     "moduleResolution": "bundler",

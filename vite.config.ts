@@ -5,17 +5,8 @@ import { defineConfig } from "vite"
 export default defineConfig({
   plugins: [react()],
   build: {
-    sourcemap: true,
-    rollupOptions: {
-      external: ['react-window'],
-       onwarn(warning, defaultHandler) {
-        if (warning.code === 'SOURCEMAP_ERROR') {
-          return
-        }
-
-        defaultHandler(warning)
-      },
-    },
+    sourcemap: false,
+   
   },
   resolve: {
     alias: {
