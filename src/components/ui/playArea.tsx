@@ -7,7 +7,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon } from "lucide-react";
+import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon, Expand } from "lucide-react";
 import { useState } from "react";
 
 interface PlayAreaProps {
@@ -49,6 +49,8 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
         setCounts((prevCounts) => prevCounts.slice(0, -1));
     };
 
+    const element = document.documentElement;
+
   return (
     <>
       <div className="grid grid-cols-2 grid-rows-${numPlayers} h-screen w-full bg-background text-foreground">
@@ -79,6 +81,9 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                 </Button>
                 <Button variant="rounded" className="w-16 h-16" onClick={onMenu}>
                   <Home />
+                </Button>
+                <Button variant="rounded" className="w-16 h-16" onClick={() => element.requestFullscreen()}>
+                  <Expand />
                 </Button>
               </AlertDialogFooter>
             </AlertDialogContent>
