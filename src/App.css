@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0rem;
   text-align: center;
+  overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;

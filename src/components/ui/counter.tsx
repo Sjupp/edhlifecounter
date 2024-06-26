@@ -64,6 +64,8 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
         onClick={onDecrement}
         onMouseDown={() => handleMouseDown("decrement")}
         onMouseUp={handleMouseUp}
+        onTouchStart={() => handleMouseDown("decrement")}
+        onTouchEnd={handleMouseUp}
         onMouseLeave={handleMouseLeave}
         >
         <MinusIcon className="w-5 h-5" />
@@ -76,6 +78,8 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
         onClick={onIncrement}
         onMouseDown={() => handleMouseDown("increment")}
         onMouseUp={handleMouseUp}
+        onTouchStart={() => handleMouseDown("decrement")}
+        onTouchEnd={handleMouseUp}
         onMouseLeave={handleMouseLeave}
         >
         <PlusIcon className="w-5 h-5" />

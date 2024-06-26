@@ -18,6 +18,7 @@ export default function PlayerSelect({
 }: playerSelectProps) {
 
 
+  
 const [players, setPlayers] = useState([{
     id: 1,
     name: "Player 1",
@@ -60,7 +61,7 @@ const [players, setPlayers] = useState([{
     <>
 
 
-<div className="flex flex-col items-center justify-center h-screen w-full">
+<div className="flex flex-col items-center justify-center h-full w-full overflow-auto">
     <Card className="flex flex-col justify-center w-2/3 items-center">
 
       <div className="flex flex-wrap gap-4 justify-center items-center pointer-events-auto p-4">
