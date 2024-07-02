@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader } from "./card";
 import { Input } from "./input";
 
 const { legendaryCreatures } = preprocessCards();
+import { playerData, updatePlayerData, updateCommanderData, Player } from "@/data/players/playerData";
 
 interface playerSelectProps {
   numPlayers: number;
@@ -16,30 +17,8 @@ export default function PlayerSelect({
   numPlayers,
   onConfirm,
 }: playerSelectProps) {
-
-
   
-const [players, setPlayers] = useState([{
-    id: 1,
-    name: "Player 1",
-    commander: ""
-}, {
-    id: 2,
-    name: "Player 2",
-    commander: ""
-}, {
-    id: 3, 
-    name: "Player 3",
-    commander: ""
-}, {
-    id: 6,
-    name: "Player 4",
-    commander: ""
-}, {
-    id: 5,
-    name: "Player 5",
-    commander: ""
-}]);
+const [players, setPlayers] = useState<Player[]>(playerData);
 
   const updatePlayer = (id: number, newName: string) => {
     setPlayers((prevPlayers) =>
@@ -47,6 +26,7 @@ const [players, setPlayers] = useState([{
         player.id === id ? { ...player, name: newName } : player
       )
     );
+    updatePlayerData(id, newName);
   };
 
   const updateCommander = (id: number, newCommander: any) => {
@@ -55,6 +35,7 @@ const [players, setPlayers] = useState([{
         player.id === id ? { ...player, commander: newCommander } : player
       )
     );
+    updateCommanderData(id, newCommander);
   };
 
   return (
@@ -82,6 +63,7 @@ const [players, setPlayers] = useState([{
       </div>
       <div>
         <Button onClick={() => onConfirm(numPlayers)}>Start Game</Button>
+        <Button onClick={() => console.log(playerData)}>Check Players</Button>
       </div>
         </Card>
         </div>

@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon, Expand } from "lucide-react";
 import { useState } from "react";
+import { playerData, Player } from "@/data/players/playerData";
 
 interface PlayAreaProps {
   numPlayers: number;
@@ -108,6 +109,8 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                 : "none"
             }
             count={count}
+            playerName={playerData[i].name}
+            commander={playerData[i].commander}
             onIncrement={() => handleIncrement(i)}
             onDecrement={() => handleDecrement(i)}
           />

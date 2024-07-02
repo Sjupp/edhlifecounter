@@ -5,13 +5,15 @@ import { Button } from "./button";
 interface CounterProps {
   rot: string;
   count: number;
+  playerName: string;
+  commander: string;
   onIncrement: () => void;
   onDecrement: () => void;
 }
 
 
 
-const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
+const Counter = ({rot, count, playerName, commander, onIncrement, onDecrement}: CounterProps) => {
   const [isPressing, setIsPressing] = useState(false);
   const [pressType, setPresstype] = useState<"increment" | "decrement" | null>(
     null
@@ -53,7 +55,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
   let content = (
     <><div className="flex flex-col items-center gap-4 ">
       <div className="flex text-gray-500 font-semibold">
-        Player name
+        {playerName}
       </div>
       <div className="flex gap-4 p-6 items-center justify-center">
 
@@ -78,7 +80,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
         onClick={onIncrement}
         onMouseDown={() => handleMouseDown("increment")}
         onMouseUp={handleMouseUp}
-        onTouchStart={() => handleMouseDown("decrement")}
+        onTouchStart={() => handleMouseDown("increment")}
         onTouchEnd={handleMouseUp}
         onMouseLeave={handleMouseLeave}
         >
@@ -86,7 +88,7 @@ const Counter = ({rot, count, onIncrement, onDecrement}: CounterProps) => {
       </Button>
         </div>
       <div className="text-gray-500 font-semibold">
-        Commander name
+        {commander}
       </div>
 
     </div>

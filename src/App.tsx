@@ -11,7 +11,6 @@ function App() {
   >("menu");
 
 
-
   const handleStartGame = (playerCount: number) => {
     setNumPlayers(playerCount);
     setCurrentScreen("play");
