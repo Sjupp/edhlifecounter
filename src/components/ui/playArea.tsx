@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon, Expand } from "lucide-react";
 import { useState } from "react";
-import { playerData, Player } from "@/data/players/playerData";
+import { playerData } from "@/data/players/playerData";
 
 interface PlayAreaProps {
   numPlayers: number;
@@ -55,7 +55,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   return (
     <>
       <div className="grid grid-cols-2 grid-rows-${numPlayers} h-screen w-full bg-background text-foreground">
-        <div className="fixed top-1/2 left-0 w-full h-48 z-30 pointer-events-none">
+        <div className="fixed top-2/3 left-0 w-full h-48 z-30 pointer-events-none">
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="outline" className="circle-button pointer-events-auto">
