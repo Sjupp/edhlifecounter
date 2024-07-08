@@ -10,7 +10,6 @@ function App() {
     "menu" | "playerSelect" | "play"
   >("menu");
 
-
   const handleStartGame = (playerCount: number) => {
     setNumPlayers(playerCount);
     setCurrentScreen("play");
@@ -27,15 +26,18 @@ function App() {
 
   return (
     <>
-      {currentScreen === "menu" && <Menu numPlayers={numPlayers} setNumPlayers={setNumPlayers} onPlayerSelect={handlePlayerSelect} />}
+      {currentScreen === "menu" && (
+        <Menu
+          numPlayers={numPlayers}
+          setNumPlayers={setNumPlayers}
+          onPlayerSelect={handlePlayerSelect}
+        />
+      )}
       {currentScreen === "play" && (
         <PlayArea numPlayers={numPlayers} onMenu={handleMenu} />
       )}
       {currentScreen === "playerSelect" && (
-        <PlayerSelect
-          numPlayers={numPlayers}
-          onConfirm={handleStartGame}
-        />
+        <PlayerSelect numPlayers={numPlayers} onConfirm={handleStartGame} />
       )}
     </>
   );

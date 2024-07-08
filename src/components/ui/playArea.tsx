@@ -7,7 +7,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Home, Minimize, MinusIcon, PlusIcon, RefreshCwIcon, Expand } from "lucide-react";
+import {
+  Home,
+  Minimize,
+  MinusIcon,
+  PlusIcon,
+  RefreshCwIcon,
+  Expand,
+} from "lucide-react";
 import { useState } from "react";
 import { playerData } from "@/data/players/playerData";
 
@@ -17,40 +24,41 @@ interface PlayAreaProps {
 }
 
 const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
-    const initialCounts = Array(numPlayers).fill(40);
-    const [counts, setCounts] = useState<number[]>(initialCounts);
-    const [players, setPlayers] = useState(numPlayers);
+  const initialCounts = Array(numPlayers).fill(40);
+  const [playerLifeCounters, setPlayerLifeCounters] =
+    useState<number[]>(initialCounts);
+  const [players, setPlayers] = useState(numPlayers);
 
-    const handleIncrement = (i: number) => {
-        setCounts((prev) => {
-            const newCounts = [...prev];
-            newCounts[i] += 1;
-            return newCounts;
-        });
-    };
+  const handleIncrement = (i: number) => {
+    setPlayerLifeCounters((prev) => {
+      const newCounts = [...prev];
+      newCounts[i] += 1;
+      return newCounts;
+    });
+  };
 
-    const handleDecrement = (i: number) => {
-        setCounts((prev) => {
-            const newCounts = [...prev];
-            newCounts[i] -= 1;
-            return newCounts;
-        });
-    };
+  const handleDecrement = (i: number) => {
+    setPlayerLifeCounters((prev) => {
+      const newCounts = [...prev];
+      newCounts[i] -= 1;
+      return newCounts;
+    });
+  };
 
-    const handleReset = () => {
-        setCounts(initialCounts);
-    };
+  const handleReset = () => {
+    setPlayerLifeCounters(initialCounts);
+  };
 
-    const handleAddPlayer = () => {
-        setPlayers((prev) => prev + 1);
-        setCounts((prev) => [...prev, 40]);
-    };
-    const handleRemovePlayer = () => {            
-        setPlayers((prev) => prev - 1);
-        setCounts((prevCounts) => prevCounts.slice(0, -1));
-    };
+  const handleAddPlayer = () => {
+    setPlayers((prev) => prev + 1);
+    setPlayerLifeCounters((prev) => [...prev, 40]);
+  };
+  const handleRemovePlayer = () => {
+    setPlayers((prev) => prev - 1);
+    setPlayerLifeCounters((prevCounts) => prevCounts.slice(0, -1));
+  };
 
-    const element = document.documentElement;
+  const element = document.documentElement;
 
   return (
     <>
@@ -58,8 +66,11 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
         <div className="fixed top-2/3 left-0 w-full h-48 z-30 pointer-events-none">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline" className="circle-button pointer-events-auto">
-                Menu
+              <Button
+                variant="outline"
+                className="circle-button pointer-events-auto"
+              >
+                Yeehaw
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent className="flex flex-col gap-4">
@@ -67,10 +78,18 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                 <AlertDialogCancel className="w-16 h-16">
                   <Minimize />
                 </AlertDialogCancel>
-                <Button variant="rounded" className="w-16 h-16" onClick={handleRemovePlayer}>
+                <Button
+                  variant="rounded"
+                  className="w-16 h-16"
+                  onClick={handleRemovePlayer}
+                >
                   <MinusIcon />
                 </Button>
-                <Button variant="rounded" className="w-16 h-16" onClick={handleAddPlayer}>
+                <Button
+                  variant="rounded"
+                  className="w-16 h-16"
+                  onClick={handleAddPlayer}
+                >
                   <PlusIcon />
                 </Button>
                 <Button
@@ -80,17 +99,25 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                 >
                   <RefreshCwIcon />
                 </Button>
-                <Button variant="rounded" className="w-16 h-16" onClick={onMenu}>
+                <Button
+                  variant="rounded"
+                  className="w-16 h-16"
+                  onClick={onMenu}
+                >
                   <Home />
                 </Button>
-                <Button variant="rounded" className="w-16 h-16" onClick={() => element.requestFullscreen()}>
+                <Button
+                  variant="rounded"
+                  className="w-16 h-16"
+                  onClick={() => element.requestFullscreen()}
+                >
                   <Expand />
                 </Button>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        {counts.map((count, i) => (
+        {playerLifeCounters.map((count, i) => (
           <Counter
             key={i}
             rot={

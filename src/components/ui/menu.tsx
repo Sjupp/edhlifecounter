@@ -10,7 +10,7 @@ import {
 
 interface MenuProps {
   numPlayers: number;
-  setNumPlayers: (count: number) => void;
+  setNumPlayers: React.Dispatch<React.SetStateAction<number>>;
   onPlayerSelect: (numPlayers: number) => void;
 }
 
@@ -29,13 +29,13 @@ const Menu = ({ onPlayerSelect, numPlayers, setNumPlayers }: MenuProps) => {
             <div className="align-middle gap-6 justify-center flex">
               <Button
                 variant="outline"
-                onClick={() => setNumPlayers(numPlayers - 1)}
+                onClick={() => setNumPlayers((prev) => prev - 1)}
               >
                 <MinusIcon className="h-5 w-5" />
               </Button>
               <Button
                 variant="outline"
-                onClick={() => setNumPlayers(numPlayers + 1)}
+                onClick={() => setNumPlayers((prev) => prev + 1)}
               >
                 <PlusIcon className="h-5 w-5" />
               </Button>
