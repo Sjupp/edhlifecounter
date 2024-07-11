@@ -2,6 +2,7 @@
 // @ts-ignore
 
 import React from "react";
+import { Slot } from "@radix-ui/react-slot";
 
 const MyComponent = (props: { displayNumber: number }) => {
   const { displayNumber } = props;
@@ -12,9 +13,9 @@ const MyComponent = (props: { displayNumber: number }) => {
 
   return (
     <div
-      className="flex"
+      className="flex text-6xl font-bold"
       style={{
-        minHeight: "24px",
+        minHeight: "60px",
         color: isPositive(displayNumber) ? "green" : "red",
       }}
     >

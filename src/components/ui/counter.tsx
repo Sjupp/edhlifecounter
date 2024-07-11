@@ -89,7 +89,10 @@ const Counter = ({
   let content = (
     <>
       <div className="flex flex-col items-center gap-4 ">
-        <MyTest displayNumber={lifeDiff}></MyTest>
+        <MyTest
+          className="text-6xl font-bold"
+          displayNumber={lifeDiff}
+        ></MyTest>
         <div className="flex text-gray-500 font-semibold">{playerName}</div>
         <div className="flex gap-4 p-6 items-center justify-center">
           <Button
