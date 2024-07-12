@@ -82,6 +82,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                   variant="rounded"
                   className="w-16 h-16"
                   onClick={handleRemovePlayer}
+                  disabled={players <= 2}
                 >
                   <MinusIcon />
                 </Button>
@@ -89,6 +90,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                   variant="rounded"
                   className="w-16 h-16"
                   onClick={handleAddPlayer}
+                  disabled={players >= 5}
                 >
                   <PlusIcon />
                 </Button>
