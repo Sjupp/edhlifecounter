@@ -24,9 +24,9 @@ interface PlayAreaProps {
 }
 
 const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
-  const initialCounts = Array(numPlayers).fill(40);
-  const [playerLifeCounters, setPlayerLifeCounters] =
-    useState<number[]>(initialCounts);
+  const [playerLifeCounters, setPlayerLifeCounters] = useState<number[]>(
+    Array(numPlayers).fill(40)
+  );
   const [players, setPlayers] = useState(numPlayers);
 
   const handleIncrement = (i: number) => {
@@ -46,7 +46,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   };
 
   const handleReset = () => {
-    setPlayerLifeCounters(initialCounts);
+    setPlayerLifeCounters(Array(players).fill(40));
   };
 
   const handleAddPlayer = () => {
