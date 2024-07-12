@@ -31,22 +31,18 @@ const Counter = ({
   );
 
   useEffect(() => {
-    console.log("running use effect");
     setLifeDiff(lifeCount - lifeCountSnapshot);
     if (diffTimer) {
-      console.log("clearing old timer");
       clearTimeout(diffTimer);
     }
     setDiffTimer(
       setTimeout(() => {
-        console.log("reached timer end");
         setLifeDiff(0);
         setDiffTimer(null);
       }, 2000)
     );
 
     return () => {
-      console.log("cleanup func");
       clearTimeout(diffTimer);
     };
     // I know what I'm doing
@@ -89,10 +85,7 @@ const Counter = ({
   let content = (
     <>
       <div className="flex flex-col items-center gap-4 ">
-        <MyTest
-          className="text-6xl font-bold"
-          displayNumber={lifeDiff}
-        ></MyTest>
+        <MyTest displayNumber={lifeDiff}></MyTest>
         <div className="flex text-gray-500 font-semibold">{playerName}</div>
         <div className="flex gap-4 p-6 items-center justify-center">
           <Button

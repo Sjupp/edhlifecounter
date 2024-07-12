@@ -22,7 +22,9 @@ export default function PlayerSelect({
   numPlayers,
   onConfirm,
 }: playerSelectProps) {
-  const [players, setPlayers] = useState<Player[]>(playerData);
+  const [players, setPlayers] = useState<Player[]>(
+    playerData.slice(0, numPlayers)
+  );
 
   const updatePlayer = (id: number, newName: string) => {
     setPlayers((prevPlayers) =>
