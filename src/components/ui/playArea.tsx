@@ -14,6 +14,7 @@ import {
   PlusIcon,
   RefreshCwIcon,
   Expand,
+  Check,
 } from "lucide-react";
 import { useState } from "react";
 import { playerData } from "@/data/players/playerData";
@@ -28,6 +29,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
     Array(numPlayers).fill(40)
   );
   const [players, setPlayers] = useState(numPlayers);
+  const [showConfirm, setshowConfirm] = useState(false);
 
   const handleIncrement = (i: number) => {
     setPlayerLifeCounters((prev) => {
@@ -75,7 +77,10 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
             </AlertDialogTrigger>
             <AlertDialogContent className="flex flex-col gap-4">
               <AlertDialogFooter className="flex items-center gap-6 justify-center">
-                <AlertDialogCancel className="w-16 h-16">
+                <AlertDialogCancel
+                  onClick={() => setshowConfirm(false)}
+                  className="w-16 h-16"
+                >
                   <Minimize />
                 </AlertDialogCancel>
                 <Button
@@ -101,13 +106,24 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                 >
                   <RefreshCwIcon />
                 </Button>
-                <Button
-                  variant="rounded"
-                  className="w-16 h-16"
-                  onClick={onMenu}
-                >
-                  <Home />
-                </Button>
+                {showConfirm ? (
+                  <Button
+                    variant="rounded"
+                    className="w-16 h-16"
+                    onClick={onMenu}
+                  >
+                    <Check />
+                  </Button>
+                ) : (
+                  <Button
+                    variant="rounded"
+                    className="w-16 h-16"
+                    onClick={() => setshowConfirm(true)}
+                  >
+                    <Home />
+                  </Button>
+                )}
+
                 <Button
                   variant="rounded"
                   className="w-16 h-16"
