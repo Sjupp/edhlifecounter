@@ -7,6 +7,7 @@ interface CounterProps {
   count: number;
   playerCount: number;
   componentIndex: number;
+  switchOddPlayer: boolean;
   playerName: string;
   commander: string;
   onIncrement: () => void;
@@ -17,6 +18,7 @@ const Counter = ({
   count: lifeCount,
   playerCount,
   componentIndex,
+  switchOddPlayer,
   playerName,
   commander,
   onIncrement,
@@ -84,9 +86,15 @@ const Counter = ({
     setIsPressing(false);
   };
 
-  const isEven = componentIndex % 2 === 0;
-  let newRotation = isEven ? "rotate-90" : "-rotate-90";
-  if (isEven && componentIndex == playerCount - 1) newRotation = "0"; // last player always has 0 rotation
+  const isOdd = componentIndex % 2 === 0;
+  let newRotation = "";
+  if (switchOddPlayer) {
+    newRotation = isOdd ? "-rotate-90" : "rotate-90";
+    if (isOdd && componentIndex == 0) newRotation = "rotate-180";
+  } else {
+    newRotation = isOdd ? "rotate-90" : "-rotate-90";
+    if (!isOdd && componentIndex == playerCount - 1) newRotation = "0";
+  }
 
   if (lifeCount <= 0) {
     return (

@@ -15,10 +15,10 @@ import {
   RefreshCwIcon,
   Expand,
   Check,
+  SwitchCamera,
 } from "lucide-react";
 import { useState } from "react";
 import { playerData } from "@/data/players/playerData";
-import PlayerRotator from "./PlayerRotator";
 import PlayerBackground from "./PlayerBackground";
 
 interface PlayAreaProps {
@@ -32,6 +32,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   );
   const [players, setPlayers] = useState(numPlayers);
   const [showConfirm, setshowConfirm] = useState(false);
+  const [switchOddPlayer, setSwitchOddPlayer] = useState(true);
 
   const handleIncrement = (i: number) => {
     setPlayerLifeCounters((prev) => {
@@ -125,7 +126,13 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                     <Home />
                   </Button>
                 )}
-
+                <Button
+                  variant="rounded"
+                  className="w-16 h-16"
+                  onClick={() => setSwitchOddPlayer(!switchOddPlayer)}
+                >
+                  <SwitchCamera />
+                </Button>
                 <Button
                   variant="rounded"
                   className="w-16 h-16"
@@ -143,11 +150,13 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
             myBgColor=""
             componentIndex={i}
             playerCount={players}
+            switchOddPlayer={switchOddPlayer}
           >
             {/* <PlayerRotator componentIndex={i} playerCount={players}> */}
             <Counter
               componentIndex={i}
               playerCount={players}
+              switchOddPlayer={switchOddPlayer}
               count={count}
               playerName={playerData[i].name}
               commander={playerData[i].commander}
