@@ -4,8 +4,9 @@ import { Button } from "./button";
 import MyTest from "./MyTest";
 
 interface CounterProps {
-  rot: string;
   count: number;
+  playerCount: number;
+  componentIndex: number;
   playerName: string;
   commander: string;
   onIncrement: () => void;
@@ -13,8 +14,9 @@ interface CounterProps {
 }
 
 const Counter = ({
-  rot,
   count: lifeCount,
+  playerCount,
+  componentIndex,
   playerName,
   commander,
   onIncrement,
@@ -82,68 +84,55 @@ const Counter = ({
     setIsPressing(false);
   };
 
-  let content = (
-    <>
-      <div className="flex flex-col items-center gap-4 ">
-        <MyTest displayNumber={lifeDiff}></MyTest>
-        <div className="flex text-gray-500 font-semibold">{playerName}</div>
-        <div className="flex gap-4 p-6 items-center justify-center">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="pointer-events-auto"
-            onClick={onDecrement}
-            onMouseDown={() => handleMouseDown("decrement")}
-            onMouseUp={handleMouseUp}
-            onTouchStart={() => handleMouseDown("decrement")}
-            onTouchEnd={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
-          >
-            <MinusIcon className="w-5 h-5" />
-          </Button>
-          <div className="text-6xl font-bold">{lifeCount}</div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="pointer-events-auto"
-            onClick={onIncrement}
-            onMouseDown={() => handleMouseDown("increment")}
-            onMouseUp={handleMouseUp}
-            onTouchStart={() => handleMouseDown("increment")}
-            onTouchEnd={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
-          >
-            <PlusIcon className="w-5 h-5" />
-          </Button>
-        </div>
-        <div className="text-gray-500 font-semibold">
-          {commander} BIg Bad Man
-        </div>
-      </div>
-    </>
-  );
+  const isEven = componentIndex % 2 === 0;
+  let newRotation = isEven ? "rotate-90" : "-rotate-90";
+  if (isEven && componentIndex == playerCount - 1) newRotation = "0"; // last player always has 0 rotation
 
   if (lifeCount <= 0) {
-    content = (
-      <div className="text-2xl flex items-center justify-center">Game Over</div>
+    return (
+      <div
+        className={`text-2xl flex items-center justify-center ${newRotation}`}
+      >
+        Game Over
+      </div>
     );
   }
 
-  const getClassNameFromRotation = (rot) => {
-    if (rot === "none") return "rotate-0 col-span-2";
-    if (rot === "-90") return "-rotate-90 flex-col";
-    if (rot === "90") return "rotate-90 flex-col";
-    return "rotate-0 flex-col";
-  };
-
-  const myString = `flex items-center justify-center transform ${getClassNameFromRotation(
-    rot
-  )} pointer-events-none`;
-
   return (
-    <>
-      <div className={myString}>{content}</div>
-    </>
+    <div className={`flex flex-col items-center gap-4 ${newRotation}`}>
+      <MyTest displayNumber={lifeDiff}></MyTest>
+      <div className="flex text-gray-500 font-semibold">{playerName}</div>
+      <div className="flex gap-4 p-6 items-center justify-center">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="pointer-events-auto"
+          onClick={onDecrement}
+          onMouseDown={() => handleMouseDown("decrement")}
+          onMouseUp={handleMouseUp}
+          onTouchStart={() => handleMouseDown("decrement")}
+          onTouchEnd={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+        >
+          <MinusIcon className="w-5 h-5" />
+        </Button>
+        <div className="text-6xl font-bold">{lifeCount}</div>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="pointer-events-auto"
+          onClick={onIncrement}
+          onMouseDown={() => handleMouseDown("increment")}
+          onMouseUp={handleMouseUp}
+          onTouchStart={() => handleMouseDown("increment")}
+          onTouchEnd={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+        >
+          <PlusIcon className="w-5 h-5" />
+        </Button>
+      </div>
+      <div className="text-gray-500 font-semibold">{commander} Big Bad Man</div>
+    </div>
   );
 };
 

@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { playerData } from "@/data/players/playerData";
+import PlayerRotator from "./PlayerRotator";
+import PlayerBackground from "./PlayerBackground";
 
 interface PlayAreaProps {
   numPlayers: number;
@@ -65,7 +67,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   return (
     <>
       <div className="grid grid-cols-2 grid-rows-${numPlayers} h-screen w-full bg-background text-foreground">
-        <div className="fixed top-2/3 left-0 w-full h-48 z-30 pointer-events-none">
+        <div className="fixed top-2/3 w-full z-30 pointer-events-none">
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button
@@ -136,29 +138,24 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
           </AlertDialog>
         </div>
         {playerLifeCounters.map((count, i) => (
-          <Counter
+          <PlayerBackground
             key={i}
-            rot={
-              players <= 3
-                ? (i + 1) % 3 === 0
-                  ? "none"
-                  : (i + 1) % 3 === 1
-                  ? "90"
-                  : "-90"
-                : players >= 4
-                ? (i + 1) % 5 === 0
-                  ? "none"
-                  : (i + 1) % 5 === 1 || (i + 1) % 5 === 3
-                  ? "90"
-                  : "-90"
-                : "none"
-            }
-            count={count}
-            playerName={playerData[i].name}
-            commander={playerData[i].commander}
-            onIncrement={() => handleIncrement(i)}
-            onDecrement={() => handleDecrement(i)}
-          />
+            myBgColor=""
+            componentIndex={i}
+            playerCount={players}
+          >
+            {/* <PlayerRotator componentIndex={i} playerCount={players}> */}
+            <Counter
+              componentIndex={i}
+              playerCount={players}
+              count={count}
+              playerName={playerData[i].name}
+              commander={playerData[i].commander}
+              onIncrement={() => handleIncrement(i)}
+              onDecrement={() => handleDecrement(i)}
+            />
+            {/* </PlayerRotator> */}
+          </PlayerBackground>
         ))}
       </div>
     </>
