@@ -113,7 +113,9 @@ const Counter = ({
   }
 
   return (
-    <div className={`flex flex-col items-center gap-4 ${newRotation}`}>
+    <div
+      className={`flex flex-col items-center gap-4 pointer-events-none ${newRotation}`}
+    >
       <MyTest displayNumber={lifeDiff}></MyTest>
       <div className="flex text-gray-500 font-semibold">{playerName}</div>
       <div className="flex gap-4 p-6 items-center justify-center">
