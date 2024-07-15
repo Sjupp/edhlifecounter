@@ -14,8 +14,6 @@ const PlayerBackground = ({
   switchOddPlayer,
   children,
 }: PropsWithChildren<PlayerBackgroundProps>) => {
-  const newColor = Math.random().toString(16).substr(-6);
-
   const oddPlayerIndex = switchOddPlayer ? 0 : playerCount - 1;
   const isEven = oddPlayerIndex % 2 === 0;
 
@@ -28,7 +26,7 @@ const PlayerBackground = ({
   return (
     <div
       style={{
-        backgroundColor: "#" + newColor,
+        backgroundColor: "#" + myBgColor,
         justifyContent: "center",
         alignContent: "center",
       }}

@@ -17,7 +17,7 @@ import {
   Check,
   SwitchCamera,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { playerData } from "@/data/players/playerData";
 import PlayerBackground from "./PlayerBackground";
 
@@ -33,6 +33,17 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   const [players, setPlayers] = useState(numPlayers);
   const [showConfirm, setshowConfirm] = useState(false);
   const [switchOddPlayer, setSwitchOddPlayer] = useState(false);
+  const [playerBGColors, setPlayerBGColors] = useState<string[]>(
+    Array(numPlayers).fill("#FFF")
+  );
+
+  useEffect(() => {
+    playerBGColors.map(
+      (_, index) =>
+        (playerBGColors[index] = Math.random().toString(16).substr(-6))
+    );
+    return () => {};
+  }, []);
 
   const handleIncrement = (i: number) => {
     setPlayerLifeCounters((prev) => {
@@ -68,7 +79,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   return (
     <>
       <div className="grid grid-cols-2 grid-rows-${numPlayers} h-screen w-full bg-background text-foreground">
-        <div className="fixed top-2/3 w-full z-30 pointer-events-none">
+        <div className="fixed top-1/2 w-full z-30 pointer-events-none">
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button
@@ -147,12 +158,11 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
         {playerLifeCounters.map((count, i) => (
           <PlayerBackground
             key={i}
-            myBgColor=""
+            myBgColor={playerBGColors[i]}
             componentIndex={i}
             playerCount={players}
             switchOddPlayer={switchOddPlayer}
           >
-            {/* <PlayerRotator componentIndex={i} playerCount={players}> */}
             <Counter
               componentIndex={i}
               playerCount={players}
@@ -163,7 +173,6 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
               onIncrement={() => handleIncrement(i)}
               onDecrement={() => handleDecrement(i)}
             />
-            {/* </PlayerRotator> */}
           </PlayerBackground>
         ))}
       </div>
