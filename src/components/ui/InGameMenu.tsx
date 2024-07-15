@@ -4,6 +4,7 @@ type InGameMenuProps = {
   actionCallback: () => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const InGameMenu = ({ actionCallback, prompt }: InGameMenuProps) => (
   <div>
     <AlertDialog.Root>

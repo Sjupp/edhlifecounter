@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MinusIcon, PlusIcon, Timer } from "lucide-react";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "./button";
 import MyTest from "./MyTest";
 

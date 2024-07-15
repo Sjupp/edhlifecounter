@@ -2,7 +2,6 @@
 // @ts-ignore
 
 import React from "react";
-import { Slot } from "@radix-ui/react-slot";
 
 const MyComponent = (props: { displayNumber: number }) => {
   const { displayNumber } = props;

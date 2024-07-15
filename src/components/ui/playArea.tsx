@@ -33,9 +33,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   const [players, setPlayers] = useState(numPlayers);
   const [showConfirm, setshowConfirm] = useState(false);
   const [switchOddPlayer, setSwitchOddPlayer] = useState(false);
-  const [playerBGColors, setPlayerBGColors] = useState<string[]>(
-    Array(numPlayers).fill("#FFF")
-  );
+  const [playerBGColors] = useState<string[]>(Array(numPlayers).fill("#FFF"));
 
   useEffect(() => {
     playerBGColors.map(
