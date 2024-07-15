@@ -86,14 +86,20 @@ const Counter = ({
     setIsPressing(false);
   };
 
-  const isOdd = componentIndex % 2 === 0;
-  let newRotation = "";
-  if (switchOddPlayer) {
-    newRotation = isOdd ? "-rotate-90" : "rotate-90";
-    if (isOdd && componentIndex == 0) newRotation = "rotate-180";
+  const oddPlayerIndex = switchOddPlayer ? 0 : playerCount - 1;
+  const isEvenPlayerCount = playerCount % 2 === 0;
+
+  let newRotation = "rotate-0";
+  // alternate odd/even check depending on player amount and if odd player is first or last
+  if (componentIndex % 2 == (switchOddPlayer && !isEvenPlayerCount ? 1 : 0)) {
+    newRotation = "rotate-90";
   } else {
-    newRotation = isOdd ? "rotate-90" : "-rotate-90";
-    if (!isOdd && componentIndex == playerCount - 1) newRotation = "0";
+    newRotation = "-rotate-90";
+  }
+
+  // flip the odd player
+  if (!isEvenPlayerCount && componentIndex == oddPlayerIndex) {
+    newRotation = switchOddPlayer ? "rotate-180" : "rotate-0";
   }
 
   if (lifeCount <= 0) {

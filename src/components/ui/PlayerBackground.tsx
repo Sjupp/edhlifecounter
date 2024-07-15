@@ -16,12 +16,15 @@ const PlayerBackground = ({
 }: PropsWithChildren<PlayerBackgroundProps>) => {
   const newColor = Math.random().toString(16).substr(-6);
 
-  const lastPlayerIndex = switchOddPlayer ? 0 : playerCount - 1;
+  const oddPlayerIndex = switchOddPlayer ? 0 : playerCount - 1;
+  const isEven = oddPlayerIndex % 2 === 0;
 
-  const indexFlexAdjustment =
-    componentIndex % 2 === 0 && componentIndex == lastPlayerIndex
-      ? "col-span-2"
-      : "flex-col";
+  let indexFlexAdjustment = "flex-col";
+  if (isEven && componentIndex == oddPlayerIndex) {
+    if (!switchOddPlayer || playerCount % 2 == 1)
+      indexFlexAdjustment = "col-span-2";
+  }
+
   return (
     <div
       style={{
