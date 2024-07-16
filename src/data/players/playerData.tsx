@@ -20,33 +20,44 @@ export const createNewPlayer = (index) => ({
   name: `Player ${index}`,
 });
 
-// export const playerData: Player[] = [
-//   {
-//     id: 1,
-//     name: "Player 1",
-//     commander: "",
-//   },
-//   {
-//     id: 2,
-//     name: "Player 2",
-//     commander: "",
-//   },
-//   {
-//     id: 3,
-//     name: "Player 3",
-//     commander: "",
-//   },
-//   {
-//     id: 4,
-//     name: "Player 4",
-//     commander: "",
-//   },
-//   {
-//     id: 5,
-//     name: "Player 5",
-//     commander: "",
-//   },
-// ];
+export function addPlayerToList(list: player[]) {
+  const newPlayer = {
+    ...defaultPlayer,
+    id: list.length, // not +1 due to 0-index
+    name: `Player ${list.length}`,
+  };
+
+  list.push(newPlayer);
+}
+
+export function removePlayerFromList(list: player[]) {
+  if (list.length > 0) list.pop();
+}
+
+export const removePlayer = (list: player[], id: number) => {
+  setPlayers((prevPlayers) => prevPlayers.filter((player) => player.id !== id));
+};
+
+export function setAllPlayerHealth(list: player[], value: number) {
+  list.forEach((element) => {
+    element.life = value;
+  });
+}
+
+export function changePlayerHealthBy(
+  list: player[],
+  playerId: number,
+  changeValue: number
+) {
+  const player = list.find((player) => player.id === playerId);
+  if (player) {
+    player.life += changeValue;
+  } else {
+    console.log("did not find player by id " + playerId);
+  }
+}
+
+//
 
 export const updatePlayerData = (
   list: player[],

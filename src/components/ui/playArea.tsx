@@ -19,22 +19,27 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import PlayerBackground from "./PlayerBackground";
-import { player } from "@/data/players/playerData";
+import {
+  addPlayerToList,
+  changePlayerHealthBy,
+  player,
+  removePlayerFromList,
+  setAllPlayerHealth,
+} from "@/data/players/playerData";
 
 interface PlayAreaProps {
   players: player[];
-  numPlayers: number;
   onMenu: () => void;
 }
 
-const PlayArea: React.FC<PlayAreaProps> = ({ players, numPlayers, onMenu }) => {
-  const [playerLifeCounters, setPlayerLifeCounters] = useState<number[]>(
-    Array(numPlayers).fill(40)
-  );
-  const [playerCount, setPlayerCount] = useState(numPlayers);
+const PlayArea: React.FC<PlayAreaProps> = ({ players, onMenu }) => {
   const [showConfirm, setshowConfirm] = useState(false);
   const [switchOddPlayer, setSwitchOddPlayer] = useState(false);
-  const [playerBGColors] = useState<string[]>(Array(numPlayers).fill("#FFF"));
+  const [playerBGColors] = useState<string[]>(
+    Array(players.length).fill("#FFF")
+  );
+
+  console.log(players);
 
   useEffect(() => {
     playerBGColors.map(
@@ -44,33 +49,20 @@ const PlayArea: React.FC<PlayAreaProps> = ({ players, numPlayers, onMenu }) => {
     return () => {};
   }, []);
 
-  const handleIncrement = (i: number) => {
-    setPlayerLifeCounters((prev) => {
-      const newCounts = [...prev];
-      newCounts[i] += 1;
-      return newCounts;
-    });
-  };
-
-  const handleDecrement = (i: number) => {
-    setPlayerLifeCounters((prev) => {
-      const newCounts = [...prev];
-      newCounts[i] -= 1;
-      return newCounts;
-    });
-  };
+  function handleValueChange(playerId: number, valueChange) {
+    changePlayerHealthBy(players, playerId, valueChange);
+    console.log(players);
+  }
 
   const handleReset = () => {
-    setPlayerLifeCounters(Array(playerCount).fill(40));
+    setAllPlayerHealth(players, 40);
   };
 
   const handleAddPlayer = () => {
-    setPlayerCount((prev) => prev + 1);
-    setPlayerLifeCounters((prev) => [...prev, 40]);
+    addPlayerToList(players);
   };
   const handleRemovePlayer = () => {
-    setPlayerCount((prev) => prev - 1);
-    setPlayerLifeCounters((prevCounts) => prevCounts.slice(0, -1));
+    removePlayerFromList(players);
   };
 
   const element = document.documentElement;
@@ -154,23 +146,21 @@ const PlayArea: React.FC<PlayAreaProps> = ({ players, numPlayers, onMenu }) => {
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        {playerLifeCounters.map((count, i) => (
+        {players.map((player, mapIndex) => (
           <PlayerBackground
-            key={i}
-            myBgColor={playerBGColors[i]}
-            componentIndex={i}
-            playerCount={playerCount}
+            key={mapIndex}
+            myBgColor={playerBGColors[mapIndex]}
+            componentIndex={mapIndex}
+            playerCount={players.length}
             switchOddPlayer={switchOddPlayer}
           >
             <Counter
-              componentIndex={i}
-              playerCount={playerCount}
+              componentIndex={mapIndex}
+              player={player}
+              playerCount={players.length}
               switchOddPlayer={switchOddPlayer}
-              count={count}
-              playerName={players[i].name}
-              commander={players[i].commander}
-              onIncrement={() => handleIncrement(i)}
-              onDecrement={() => handleDecrement(i)}
+              onIncrement={() => handleValueChange(mapIndex, 1)}
+              onDecrement={() => handleValueChange(mapIndex, -1)}
             />
           </PlayerBackground>
         ))}

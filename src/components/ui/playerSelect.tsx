@@ -14,13 +14,11 @@ const { legendaryCreatures } = preprocessCards();
 // } from "@/data/players/playerData";
 
 interface playerSelectProps {
-  numPlayers: number;
   onConfirm: (numPlayers: number) => void;
   players: player[];
 }
 
 export default function PlayerSelect({
-  numPlayers,
   onConfirm,
   players,
 }: playerSelectProps) {
@@ -67,7 +65,9 @@ export default function PlayerSelect({
             ))}
           </div>
           <div>
-            <Button onClick={() => onConfirm(numPlayers)}>Start Game</Button>
+            <Button onClick={() => onConfirm(players.length)}>
+              Start Game
+            </Button>
             <Button onClick={() => console.log(players)}>Check Players</Button>
           </div>
         </Card>

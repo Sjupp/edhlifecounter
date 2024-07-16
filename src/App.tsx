@@ -23,7 +23,7 @@ function App() {
 
   const handlePlayerSelect = (playerCount: number) => {
     const newPlayerList = Array.from({ length: playerCount }, (_, index) =>
-      createNewPlayer(index + 1)
+      createNewPlayer(index)
     );
     setPlayers(newPlayerList);
 
@@ -41,18 +41,10 @@ function App() {
         />
       )}
       {currentScreen === "play" && (
-        <PlayArea
-          players={players}
-          numPlayers={numPlayers}
-          onMenu={handleMenu}
-        />
+        <PlayArea players={players} onMenu={handleMenu} />
       )}
       {currentScreen === "playerSelect" && (
-        <PlayerSelect
-          players={players}
-          numPlayers={numPlayers}
-          onConfirm={handleStartGame}
-        />
+        <PlayerSelect players={players} onConfirm={handleStartGame} />
       )}
     </>
   );

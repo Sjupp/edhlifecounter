@@ -15,7 +15,6 @@ interface MenuProps {
 }
 
 const Menu = ({ onPlayerSelect, numPlayers, setNumPlayers }: MenuProps) => {
-
   return (
     <>
       <div className="flex flex-col h-screen w-full items-center justify-center p-4 text-white">

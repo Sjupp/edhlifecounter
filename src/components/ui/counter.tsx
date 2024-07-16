@@ -2,25 +2,22 @@ import { useEffect, useState } from "react";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "./button";
 import MyTest from "./MyTest";
+import { player } from "@/data/players/playerData";
 
 interface CounterProps {
-  count: number;
+  player: player;
   playerCount: number;
   componentIndex: number;
   switchOddPlayer: boolean;
-  playerName: string;
-  commander: string;
   onIncrement: () => void;
   onDecrement: () => void;
 }
 
 const Counter = ({
-  count: lifeCount,
+  player,
   playerCount,
   componentIndex,
   switchOddPlayer,
-  playerName,
-  commander,
   onIncrement,
   onDecrement,
 }: CounterProps) => {
@@ -35,7 +32,7 @@ const Counter = ({
   );
 
   useEffect(() => {
-    setLifeDiff(lifeCount - lifeCountSnapshot);
+    setLifeDiff(player.life - lifeCountSnapshot);
     if (diffTimer) {
       clearTimeout(diffTimer);
     }
@@ -51,7 +48,7 @@ const Counter = ({
     };
     // I know what I'm doing
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lifeCount]);
+  }, [player.life]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -67,11 +64,11 @@ const Counter = ({
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isPressing, pressType, onIncrement, onDecrement, lifeCount]);
+  }, [isPressing, pressType, onIncrement, onDecrement, player.life]);
 
   const handleMouseDown = (type: "increment" | "decrement") => {
     if (!diffTimer) {
-      setLifeCountSnapshot(lifeCount);
+      setLifeCountSnapshot(player.life);
     }
     setPresstype(type);
     setIsPressing(true);
@@ -102,7 +99,7 @@ const Counter = ({
     newRotation = switchOddPlayer ? "rotate-180" : "rotate-0";
   }
 
-  if (lifeCount <= 0) {
+  if (player.life <= 0) {
     return (
       <div
         className={`text-2xl flex items-center justify-center ${newRotation}`}
@@ -117,7 +114,7 @@ const Counter = ({
       className={`flex flex-col items-center gap-4 pointer-events-none ${newRotation}`}
     >
       <MyTest displayNumber={lifeDiff}></MyTest>
-      <div className="flex text-gray-500 font-semibold">{playerName}</div>
+      <div className="flex text-gray-500 font-semibold">{player.name}</div>
       <div className="flex gap-4 p-6 items-center justify-center">
         <Button
           variant="ghost"
@@ -132,7 +129,7 @@ const Counter = ({
         >
           <MinusIcon className="w-5 h-5" />
         </Button>
-        <div className="text-6xl font-bold">{lifeCount}</div>
+        <div className="text-6xl font-bold">{player.life}</div>
         <Button
           variant="ghost"
           size="icon"
@@ -147,7 +144,9 @@ const Counter = ({
           <PlusIcon className="w-5 h-5" />
         </Button>
       </div>
-      <div className="text-gray-500 font-semibold">{commander} Big Bad Man</div>
+      <div className="text-gray-500 font-semibold">
+        {player.commander} Big Bad Man
+      </div>
     </div>
   );
 };
