@@ -3,8 +3,10 @@ import "./App.css";
 import PlayArea from "./components/ui/playArea";
 import Menu from "./components/ui/menu";
 import PlayerSelect from "./components/ui/playerSelect";
+import { createNewPlayer, player } from "./data/players/playerData";
 
 function App() {
+  const [players, setPlayers] = useState<player[]>();
   const [numPlayers, setNumPlayers] = useState(5);
   const [currentScreen, setCurrentScreen] = useState<
     "menu" | "playerSelect" | "play"
@@ -20,6 +22,11 @@ function App() {
   };
 
   const handlePlayerSelect = (playerCount: number) => {
+    const newPlayerList = Array.from({ length: playerCount }, (_, index) =>
+      createNewPlayer(index + 1)
+    );
+    setPlayers(newPlayerList);
+
     setNumPlayers(playerCount);
     setCurrentScreen("playerSelect");
   };
@@ -34,10 +41,18 @@ function App() {
         />
       )}
       {currentScreen === "play" && (
-        <PlayArea numPlayers={numPlayers} onMenu={handleMenu} />
+        <PlayArea
+          players={players}
+          numPlayers={numPlayers}
+          onMenu={handleMenu}
+        />
       )}
       {currentScreen === "playerSelect" && (
-        <PlayerSelect numPlayers={numPlayers} onConfirm={handleStartGame} />
+        <PlayerSelect
+          players={players}
+          numPlayers={numPlayers}
+          onConfirm={handleStartGame}
+        />
       )}
     </>
   );

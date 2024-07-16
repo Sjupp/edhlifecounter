@@ -18,19 +18,20 @@ import {
   SwitchCamera,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { playerData } from "@/data/players/playerData";
 import PlayerBackground from "./PlayerBackground";
+import { player } from "@/data/players/playerData";
 
 interface PlayAreaProps {
+  players: player[];
   numPlayers: number;
   onMenu: () => void;
 }
 
-const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
+const PlayArea: React.FC<PlayAreaProps> = ({ players, numPlayers, onMenu }) => {
   const [playerLifeCounters, setPlayerLifeCounters] = useState<number[]>(
     Array(numPlayers).fill(40)
   );
-  const [players, setPlayers] = useState(numPlayers);
+  const [playerCount, setPlayerCount] = useState(numPlayers);
   const [showConfirm, setshowConfirm] = useState(false);
   const [switchOddPlayer, setSwitchOddPlayer] = useState(false);
   const [playerBGColors] = useState<string[]>(Array(numPlayers).fill("#FFF"));
@@ -60,15 +61,15 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
   };
 
   const handleReset = () => {
-    setPlayerLifeCounters(Array(players).fill(40));
+    setPlayerLifeCounters(Array(playerCount).fill(40));
   };
 
   const handleAddPlayer = () => {
-    setPlayers((prev) => prev + 1);
+    setPlayerCount((prev) => prev + 1);
     setPlayerLifeCounters((prev) => [...prev, 40]);
   };
   const handleRemovePlayer = () => {
-    setPlayers((prev) => prev - 1);
+    setPlayerCount((prev) => prev - 1);
     setPlayerLifeCounters((prevCounts) => prevCounts.slice(0, -1));
   };
 
@@ -99,7 +100,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                   variant="rounded"
                   className="w-16 h-16"
                   onClick={handleRemovePlayer}
-                  disabled={players <= 2}
+                  disabled={players.length <= 2}
                 >
                   <MinusIcon />
                 </Button>
@@ -107,7 +108,7 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
                   variant="rounded"
                   className="w-16 h-16"
                   onClick={handleAddPlayer}
-                  disabled={players >= 5}
+                  disabled={players.length >= 5}
                 >
                   <PlusIcon />
                 </Button>
@@ -158,16 +159,16 @@ const PlayArea: React.FC<PlayAreaProps> = ({ numPlayers, onMenu }) => {
             key={i}
             myBgColor={playerBGColors[i]}
             componentIndex={i}
-            playerCount={players}
+            playerCount={playerCount}
             switchOddPlayer={switchOddPlayer}
           >
             <Counter
               componentIndex={i}
-              playerCount={players}
+              playerCount={playerCount}
               switchOddPlayer={switchOddPlayer}
               count={count}
-              playerName={playerData[i].name}
-              commander={playerData[i].commander}
+              playerName={players[i].name}
+              commander={players[i].commander}
               onIncrement={() => handleIncrement(i)}
               onDecrement={() => handleDecrement(i)}
             />
